@@ -3,112 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой крутой сайт</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Летний Детский Лагерь «Радуга»</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Шапка -->
-    <header class="header">
-        <h1>Добро пожаловать!</h1>
+
+    <!-- Заголовок -->
+    <header>
         <nav>
-            <ul>
-                <li><a href="#">Главная</a></li>
-                <li><a href="#">Обо мне</a></li>
-                <li><a href="#">Контакты</a></li>
-            </ul>
+            <a href="#home">Главная</a>
+            <a href="#about">О Нас</a>
+            <a href="#activities">Программа</a>
+            <a href="#gallery">Галерея</a>
+            <a href="#testimonials">Отзывы</a>
+            <a href="#contact">Контакты</a>
         </nav>
+        <h1>Летний Детский Лагерь «Радуга»</h1>
+        <p>Создаем яркие впечатления вместе!</p>
     </header>
 
-    <!-- Основная секция -->
-    <main>
-        <section id="about-me">
-            <h2>Немного обо мне</h2>
-            <p>Меня зовут Вася Пупкин, я увлеченный веб-разработчик.</p>
+    <!-- Главная секция -->
+    <div id="home"></div>
+    <main class="container">
+        <section id="about">
+            <h2>О нашем лагере</h2>
+            <p>Детский лагерь «Радуга» приглашает ребят провести незабываемое лето на природе рядом с озером в Подмосковье. Здесь дети найдут друзей, попробуют себя в различных видах спорта и творчества, изучат природу и насладятся активным отдыхом.</p>
         </section>
 
-        <section id="interactive-section">
-            <h2>Интерактивная секция</h2>
-            <button onclick="changeColor()">Нажми меня</button>
+        <!-- Программа мероприятий -->
+        <section id="activities">
+            <h2>Наши программы</h2>
+            <div class="activity-cards">
+                <article class="card">
+                    <h3>Спортивные занятия</h3>
+                    <p>Футбол, баскетбол, плавание, бег и велоспорт сделают ваше лето активным и увлекательным.</p>
+                </article>
+                <article class="card">
+                    <h3>Креативные мастер-классы</h3>
+                    <p>Рисуем, лепим, шьем, создаем мультфильмы — развиваем творческие способности.</p>
+                </article>
+                <article class="card">
+                    <h3>Путешествия и экскурсии</h3>
+                    <p>Отправляемся изучать интересные места Москвы и области.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Галерея фотографий -->
+        <section id="gallery">
+            <h2>Фотографии наших приключений</h2>
+            <div class="photo-gallery">
+                <img src="image1.jpg" alt="дети играют в футбол">
+                <img src="image2.jpg" alt="ребята на экскурсиях">
+                <img src="image3.jpg" alt="мероприятия лагеря">
+            </div>
+        </section>
+
+        <!-- Отзывы родителей -->
+        <section id="testimonials">
+            <h2>Что говорят родители?</h2>
+            <div class="testimonial-slider">
+                <div class="slide">
+                    <q>«Ребенок приехал домой веселым и загорелым!»</q>
+                    <small>- Мария Петровна</small>
+                </div>
+                <div class="slide">
+                    <q>«Мои дети каждое утро ждали возвращения в лагерь снова и снова.»</q>
+                    <small>- Ольга Ивановна</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма обратной связи -->
+        <section id="contact">
+            <h2>Свяжитесь с нами</h2>
+            <form action="#" method="post">
+                <label for="name">Ваше имя:</label>
+                <input type="text" id="name" placeholder="Иван Иванов"><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="ivan@example.com"><br>
+                <textarea rows="4" cols="50" placeholder="Сообщение..."></textarea><br>
+                <button type="submit">Отправить сообщение</button>
+            </form>
         </section>
     </main>
 
-    <!-- Подвал -->
+    <!-- Футер -->
     <footer>
-        <p>© Вася Пупкин, 2025</p>
+        <p>© 2025 Летний Детский Лагерь «Радуга». Сделано с любовью.</p>
     </footer>
 
     <script src="script.js"></script>
+
 </body>
 </html>
-/* Общие стили */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Общие настройки */
+* {box-sizing: border-box;}
+body {font-family: 'Roboto', sans-serif; line-height: 1.6; background-color: #F5F5DC; color: #333;}
+.container {max-width: 1200px; margin: 0 auto; padding: 20px;}
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
-}
+/* Шапка */
+header {background-color: #FFDAB9; padding: 20px; text-align: center; color: #FFF;}
+header nav a {color: #333; text-decoration: none; margin-right: 15px;}
 
-.header {
-    text-align: center;
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px;
-}
+/* Основные секции */
+#about, #activities, #gallery, #testimonials, #contact {margin-bottom: 30px;}
+.activity-cards {display: flex; justify-content: space-between; gap: 20px;}
+.card {border: 1px solid #EAEAEA; padding: 20px; border-radius: 5px; background-color: #FFFFFF; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+.photo-gallery {display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;}
+.testimonial-slider {position: relative; overflow: hidden; width: 100%;}
+.slide {padding: 20px; background-color: #FFFFCC; margin-bottom: 10px;}
 
-nav ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
+/* Форма контактов */
+form label {display: inline-block; width: 100px; vertical-align: top;}
+form input[type="text"], form input[type="email"] {width: calc(100% - 110px); padding: 8px; margin-bottom: 10px;}
+textarea {width: 100%; padding: 8px; resize: vertical;}
+button {background-color: #CD5C5C; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;}
 
-nav a {
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
-}
+/* Footer */
+footer {background-color: #333; color: #FFF; text-align: center; padding: 10px; font-size: small;}
 
-nav a:hover {
-    transform: scale(1.1);
+@media screen and (max-width: 768px){
+    /* Адаптация меню */
+    header nav {flex-direction: column;}
+    header nav a {margin-right: 0; margin-bottom: 10px;}
+    /* Карточки активностей */
+    .activity-cards {grid-template-columns: 1fr;}
 }
+// Переключение между отзывами слайдером
+const testimonialSlider = document.querySelector('.testimonial-slider');
+let currentSlideIndex = 0;
+const slides = Array.from(testimonialSlider.children);
 
-#about-me h2, #interactive-section h2 {
-    padding-top: 20px;
-    font-size: 2em;
-    text-transform: uppercase;
-}
-
-button {
-    cursor: pointer;
-    background-color: #ffc107;
-    color: black;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-weight: bold;
-    outline: none;
-    transition: all 0.3s ease-in-out;
-}
-
-button:hover {
-    background-color: #ffb300;
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
-// Функция изменения цвета фона
-function changeColor() {
-    const colors = ['red', 'green', 'blue'];
-    document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-}
+setInterval(() => {
+    // Перемещаем активную карточку вправо
+    slides[currentSlideIndex].classList.remove('active');
+    currentSlideIndex++;
+    if(currentSlideIndex >= slides.length) currentSlideIndex = 0;
+    slides[currentSlideIndex].classList.add('active');
+}, 5000); // Менять каждые 5 секунд
