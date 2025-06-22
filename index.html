@@ -3,142 +3,828 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Летний Детский Лагерь «Радуга»</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>GameVerse - Мир игровых приключений</title>
+    <style>
+        /* Основные стили */
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #fd79a8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Шапка сайта */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #fdcb6e, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--accent), 0 0 20px var(--accent);
+            }
+
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
+            }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+            nav ul li {
+                margin-left: 2rem;
+            }
+
+                nav ul li a {
+                    color: white;
+                    text-decoration: none;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+                    position: relative;
+                }
+
+                    nav ul li a:hover {
+                        color: var(--accent);
+                    }
+
+                    nav ul li a::after {
+                        content: '';
+                        position: absolute;
+                        width: 0;
+                        height: 2px;
+                        background: var(--accent);
+                        bottom: -5px;
+                        left: 0;
+                        transition: width 0.3s ease;
+                    }
+
+                    nav ul li a:hover::after {
+                        width: 100%;
+                    }
+
+        /* Герой секция */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            position: relative;
+            padding-top: 80px;
+        }
+
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+            }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fdcb6e, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+            .btn:hover {
+                background: transparent;
+                border-color: var(--primary);
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+        /* Игровые категории */
+        .games {
+            padding: 5rem 2rem;
+            background-color: var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+            .section-title::after {
+                content: '';
+                position: absolute;
+                width: 100px;
+                height: 4px;
+                background: linear-gradient(to right, var(--primary), var(--accent));
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 2px;
+            }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: #3d3d3d;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+            .game-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            }
+
+        .game-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+            .game-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+        .game-card:hover .game-img img {
+            transform: scale(1.1);
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+            .game-info h3 {
+                margin-bottom: 0.5rem;
+                font-size: 1.5rem;
+                color: var(--accent);
+            }
+
+            .game-info p {
+                color: #ccc;
+                margin-bottom: 1rem;
+                line-height: 1.5;
+            }
+
+        .game-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Анимации игр */
+        .animations {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #2d3436, #1e272e);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animation-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .animation-box {
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+            .animation-box:hover {
+                transform: scale(1.1);
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+        /* Анимация пакмана */
+        .pacman {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #fdcb6e;
+            position: relative;
+            animation: eat 0.7s linear infinite;
+        }
+
+            .pacman::before {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-right: 25px solid transparent;
+                border-top: 25px solid #fdcb6e;
+                border-bottom: 25px solid #fdcb6e;
+                border-radius: 50%;
+                top: -25px;
+                left: 25px;
+                animation: mouth 0.7s linear infinite;
+            }
+
+        @keyframes eat {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(30deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes mouth {
+            0% {
+                transform: rotate(45deg);
+            }
+
+            50% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(45deg);
+            }
+        }
+
+        /* Анимация тетриса */
+        .tetris {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .tetris-block {
+            width: 10px;
+            height: 10px;
+            background: #fd79a8;
+            position: absolute;
+            animation: tetris-fall 2s infinite;
+        }
+
+            .tetris-block:nth-child(1) {
+                top: 0;
+                left: 0;
+            }
+
+            .tetris-block:nth-child(2) {
+                top: 0;
+                left: 10px;
+            }
+
+            .tetris-block:nth-child(3) {
+                top: 0;
+                left: 20px;
+            }
+
+            .tetris-block:nth-child(4) {
+                top: 10px;
+                left: 10px;
+            }
+
+        @keyframes tetris-fall {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(50px);
+            }
+        }
+
+        /* Анимация Марио */
+        .mario {
+            width: 30px;
+            height: 50px;
+            position: relative;
+        }
+
+        .mario-head {
+            width: 30px;
+            height: 20px;
+            background: #e74c3c;
+            border-radius: 10px 10px 0 0;
+            position: absolute;
+            top: 0;
+        }
+
+        .mario-body {
+            width: 30px;
+            height: 30px;
+            background: #e74c3c;
+            position: absolute;
+            top: 20px;
+        }
+
+        .mario-overall {
+            width: 30px;
+            height: 15px;
+            background: #3498db;
+            position: absolute;
+            top: 25px;
+        }
+
+        .mario-leg {
+            width: 15px;
+            height: 10px;
+            background: #8e44ad;
+            position: absolute;
+            top: 40px;
+        }
+
+            .mario-leg.left {
+                left: 0;
+                animation: mario-walk-left 0.5s infinite alternate;
+            }
+
+            .mario-leg.right {
+                right: 0;
+                animation: mario-walk-right 0.5s infinite alternate;
+            }
+
+        @keyframes mario-walk-left {
+            0% {
+                transform: translateX(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateX(-5px) rotate(-20deg);
+            }
+        }
+
+        @keyframes mario-walk-right {
+            0% {
+                transform: translateX(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateX(5px) rotate(20deg);
+            }
+        }
+
+        /* Анимация змейки */
+        .snake-container {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .snake-dot {
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border-radius: 50%;
+            position: absolute;
+            animation: snake-move 2s infinite;
+        }
+
+            .snake-dot:nth-child(1) {
+                top: 20px;
+                left: 0;
+                animation-delay: 0s;
+            }
+
+            .snake-dot:nth-child(2) {
+                top: 20px;
+                left: 10px;
+                animation-delay: 0.2s;
+            }
+
+            .snake-dot:nth-child(3) {
+                top: 20px;
+                left: 20px;
+                animation-delay: 0.4s;
+            }
+
+            .snake-dot:nth-child(4) {
+                top: 20px;
+                left: 30px;
+                animation-delay: 0.6s;
+            }
+
+            .snake-dot:nth-child(5) {
+                top: 20px;
+                left: 40px;
+                animation-delay: 0.8s;
+            }
+
+        @keyframes snake-move {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Подвал */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+            .footer-column h3::after {
+                content: '';
+                position: absolute;
+                width: 50%;
+                height: 2px;
+                background: var(--accent);
+                bottom: -5px;
+                left: 0;
+            }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+            .footer-column ul li {
+                margin-bottom: 0.8rem;
+            }
+
+                .footer-column ul li a {
+                    color: #dfe6e9;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                }
+
+                    .footer-column ul li a:hover {
+                        color: var(--accent);
+                        padding-left: 5px;
+                    }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+            .social-links a {
+                color: white;
+                font-size: 1.5rem;
+                transition: all 0.3s ease;
+            }
+
+                .social-links a:hover {
+                    color: var(--accent);
+                    transform: translateY(-3px);
+                }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #dfe6e9;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+                nav ul li {
+                    margin: 0.5rem;
+                }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Заголовок -->
+    <!-- Шапка сайта -->
     <header>
+        <div class="logo">GameVerse</div>
         <nav>
-            <a href="#home">Главная</a>
-            <a href="#about">О Нас</a>
-            <a href="#activities">Программа</a>
-            <a href="#gallery">Галерея</a>
-            <a href="#testimonials">Отзывы</a>
-            <a href="#contact">Контакты</a>
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#games">Игры</a></li>
+                <li><a href="#animations">Анимации</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
         </nav>
-        <h1>Летний Детский Лагерь «Радуга»</h1>
-        <p>Создаем яркие впечатления вместе!</p>
     </header>
 
-    <!-- Главная секция -->
-    <div id="home"></div>
-    <main class="container">
-        <section id="about">
-            <h2>О нашем лагере</h2>
-            <p>Детский лагерь «Радуга» приглашает ребят провести незабываемое лето на природе рядом с озером в Подмосковье. Здесь дети найдут друзей, попробуют себя в различных видах спорта и творчества, изучат природу и насладятся активным отдыхом.</p>
-        </section>
+    <!-- Герой секция -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Откройте мир игровых приключений</h1>
+            <p>Погрузитесь в удивительные вселенные, полные захватывающих историй, невероятных персонажей и незабываемых эмоций. Наш сайт - это портал в мир лучших игровых впечатлений.</p>
+            <a href="#games" class="btn">Исследовать игры</a>
+        </div>
+    </section>
 
-        <!-- Программа мероприятий -->
-        <section id="activities">
-            <h2>Наши программы</h2>
-            <div class="activity-cards">
-                <article class="card">
-                    <h3>Спортивные занятия</h3>
-                    <p>Футбол, баскетбол, плавание, бег и велоспорт сделают ваше лето активным и увлекательным.</p>
-                </article>
-                <article class="card">
-                    <h3>Креативные мастер-классы</h3>
-                    <p>Рисуем, лепим, шьем, создаем мультфильмы — развиваем творческие способности.</p>
-                </article>
-                <article class="card">
-                    <h3>Путешествия и экскурсии</h3>
-                    <p>Отправляемся изучать интересные места Москвы и области.</p>
-                </article>
-            </div>
-        </section>
-
-        <!-- Галерея фотографий -->
-        <section id="gallery">
-            <h2>Фотографии наших приключений</h2>
-            <div class="photo-gallery">
-                <img src="image1.jpg" alt="дети играют в футбол">
-                <img src="image2.jpg" alt="ребята на экскурсиях">
-                <img src="image3.jpg" alt="мероприятия лагеря">
-            </div>
-        </section>
-
-        <!-- Отзывы родителей -->
-        <section id="testimonials">
-            <h2>Что говорят родители?</h2>
-            <div class="testimonial-slider">
-                <div class="slide">
-                    <q>«Ребенок приехал домой веселым и загорелым!»</q>
-                    <small>- Мария Петровна</small>
+    <!-- Игровые категории -->
+    <section class="games" id="games">
+        <h2 class="section-title">Популярные категории</h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-img">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Экшен игры">
                 </div>
-                <div class="slide">
-                    <q>«Мои дети каждое утро ждали возвращения в лагерь снова и снова.»</q>
-                    <small>- Ольга Ивановна</small>
+                <div class="game-info">
+                    <h3>Экшен-приключения</h3>
+                    <p>Динамичные игры с захватывающим сюжетом и интенсивным геймплеем.</p>
+                    <span class="game-tag">Экшен</span>
+                    <span class="game-tag">Приключения</span>
                 </div>
             </div>
-        </section>
 
-        <!-- Форма обратной связи -->
-        <section id="contact">
-            <h2>Свяжитесь с нами</h2>
-            <form action="#" method="post">
-                <label for="name">Ваше имя:</label>
-                <input type="text" id="name" placeholder="Иван Иванов"><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="ivan@example.com"><br>
-                <textarea rows="4" cols="50" placeholder="Сообщение..."></textarea><br>
-                <button type="submit">Отправить сообщение</button>
-            </form>
-        </section>
-    </main>
+            <div class="game-card">
+                <div class="game-img">
+                    <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="РПГ игры">
+                </div>
+                <div class="game-info">
+                    <h3>Ролевые игры (RPG)</h3>
+                    <p>Погрузитесь в глубокие миры с развитием персонажа и сложными сюжетами.</p>
+                    <span class="game-tag">RPG</span>
+                    <span class="game-tag">Открытый мир</span>
+                </div>
+            </div>
 
-    <!-- Футер -->
-    <footer>
-        <p>© 2025 Летний Детский Лагерь «Радуга». Сделано с любовью.</p>
+            <div class="game-card">
+                <div class="game-img">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" alt="Стратегии">
+                </div>
+                <div class="game-info">
+                    <h3>Стратегии</h3>
+                    <p>Испытайте свои тактические навыки в играх, где важны планирование и стратегия.</p>
+                    <span class="game-tag">Стратегия</span>
+                    <span class="game-tag">Тактика</span>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-img">
+                    <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Гонки">
+                </div>
+                <div class="game-info">
+                    <h3>Гонки и симуляторы</h3>
+                    <p>Почувствуйте адреналин от скорости или погрузитесь в реалистичные симуляторы.</p>
+                    <span class="game-tag">Гонки</span>
+                    <span class="game-tag">Симулятор</span>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-img">
+                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Инди игры">
+                </div>
+                <div class="game-info">
+                    <h3>Инди игры</h3>
+                    <p>Уникальные и креативные проекты от небольших студий с нестандартным подходом.</p>
+                    <span class="game-tag">Инди</span>
+                    <span class="game-tag">Креатив</span>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-img">
+                    <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Хорроры">
+                </div>
+                <div class="game-info">
+                    <h3>Хоррор и выживание</h3>
+                    <p>Испытайте настоящий страх и напряжение в играх на выживание.</p>
+                    <span class="game-tag">Хоррор</span>
+                    <span class="game-tag">Выживание</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Анимации игр -->
+    <section class="animations" id="animations">
+        <h2 class="section-title">Игровые анимации</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; line-height: 1.6;">Наведите курсор на анимации, чтобы увидеть их в действии. Эти миниатюры представляют классические игровые механики, вдохновленные культовыми играми.</p>
+
+        <div class="animation-container">
+            <div class="animation-box">
+                <div class="pacman"></div>
+            </div>
+
+            <div class="animation-box">
+                <div class="tetris">
+                    <div class="tetris-block"></div>
+                    <div class="tetris-block"></div>
+                    <div class="tetris-block"></div>
+                    <div class="tetris-block"></div>
+                </div>
+            </div>
+
+            <div class="animation-box">
+                <div class="mario">
+                    <div class="mario-head"></div>
+                    <div class="mario-body"></div>
+                    <div class="mario-overall"></div>
+                    <div class="mario-leg left"></div>
+                    <div class="mario-leg right"></div>
+                </div>
+            </div>
+
+            <div class="animation-box">
+                <div class="snake-container">
+                    <div class="snake-dot"></div>
+                    <div class="snake-dot"></div>
+                    <div class="snake-dot"></div>
+                    <div class="snake-dot"></div>
+                    <div class="snake-dot"></div>
+                </div>
+            </div>
+
+            <div class="animation-box">
+                <div class="space-invader" style="width: 50px; height: 50px; position: relative;">
+                    <div style="width: 10px; height: 10px; background: #2ecc71; position: absolute; top: 0; left: 20px;"></div>
+                    <div style="width: 30px; height: 20px; background: #2ecc71; position: absolute; top: 10px; left: 10px; border-radius: 5px;"></div>
+                    <div style="width: 10px; height: 10px; background: #2ecc71; position: absolute; top: 30px; left: 0px;"></div>
+                    <div style="width: 10px; height: 10px; background: #2ecc71; position: absolute; top: 30px; left: 40px;"></div>
+                    <div style="width: 10px; height: 10px; background: #2ecc71; position: absolute; top: 20px; left: 0px;"></div>
+                    <div style="width: 10px; height: 10px; background: #2ecc71; position: absolute; top: 20px; left: 40px;"></div>
+                </div>
+            </div>
+
+            <div class="animation-box">
+                <div class="flappy-bird" style="width: 50px; height: 50px; position: relative;">
+                    <div style="width: 30px; height: 20px; background: #f1c40f; border-radius: 50%; position: absolute; top: 15px; left: 10px;"></div>
+                    <div style="width: 10px; height: 5px; background: #e74c3c; border-radius: 50%; position: absolute; top: 20px; left: 35px;"></div>
+                    <div style="width: 5px; height: 15px; background: #f1c40f; position: absolute; top: 35px; left: 22px; transform: rotate(30deg);"></div>
+                    <div style="width: 5px; height: 15px; background: #f1c40f; position: absolute; top: 35px; left: 28px; transform: rotate(-30deg);"></div>
+                    <div style="width: 5px; height: 5px; background: #000; position: absolute; top: 20px; left: 25px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>GameVerse</h3>
+                <p>Ваш проводник в мир игровых приключений. Мы собираем лучшие игры со всего мира в одном месте.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f">f</i></a>
+                    <a href="#"><i class="fab fa-twitter">t</i></a>
+                    <a href="#"><i class="fab fa-instagram">i</i></a>
+                    <a href="#"><i class="fab fa-youtube">y</i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Разделы</h3>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#games">Игры</a></li>
+                    <li><a href="#animations">Анимации</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Категории</h3>
+                <ul>
+                    <li><a href="#">Экшен</a></li>
+                    <li><a href="#">RPG</a></li>
+                    <li><a href="#">Стратегии</a></li>
+                    <li><a href="#">Гонки</a></li>
+                    <li><a href="#">Инди</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <ul>
+                    <li>Email: info@gameverse.com</li>
+                    <li>Телефон: +7 (123) 456-7890</li>
+                    <li>Адрес: Москва, ул. Игровая, 42</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2023 GameVerse. Все права защищены. | Сделано с ❤️ для геймеров
+        </div>
     </footer>
-
-    <script src="script.js"></script>
-
 </body>
 </html>
-/* Общие настройки */
-* {box-sizing: border-box;}
-body {font-family: 'Roboto', sans-serif; line-height: 1.6; background-color: #F5F5DC; color: #333;}
-.container {max-width: 1200px; margin: 0 auto; padding: 20px;}
-
-/* Шапка */
-header {background-color: #FFDAB9; padding: 20px; text-align: center; color: #FFF;}
-header nav a {color: #333; text-decoration: none; margin-right: 15px;}
-
-/* Основные секции */
-#about, #activities, #gallery, #testimonials, #contact {margin-bottom: 30px;}
-.activity-cards {display: flex; justify-content: space-between; gap: 20px;}
-.card {border: 1px solid #EAEAEA; padding: 20px; border-radius: 5px; background-color: #FFFFFF; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
-.photo-gallery {display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;}
-.testimonial-slider {position: relative; overflow: hidden; width: 100%;}
-.slide {padding: 20px; background-color: #FFFFCC; margin-bottom: 10px;}
-
-/* Форма контактов */
-form label {display: inline-block; width: 100px; vertical-align: top;}
-form input[type="text"], form input[type="email"] {width: calc(100% - 110px); padding: 8px; margin-bottom: 10px;}
-textarea {width: 100%; padding: 8px; resize: vertical;}
-button {background-color: #CD5C5C; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;}
-
-/* Footer */
-footer {background-color: #333; color: #FFF; text-align: center; padding: 10px; font-size: small;}
-
-@media screen and (max-width: 768px){
-    /* Адаптация меню */
-    header nav {flex-direction: column;}
-    header nav a {margin-right: 0; margin-bottom: 10px;}
-    /* Карточки активностей */
-    .activity-cards {grid-template-columns: 1fr;}
-}
-// Переключение между отзывами слайдером
-const testimonialSlider = document.querySelector('.testimonial-slider');
-let currentSlideIndex = 0;
-const slides = Array.from(testimonialSlider.children);
-
-setInterval(() => {
-    // Перемещаем активную карточку вправо
-    slides[currentSlideIndex].classList.remove('active');
-    currentSlideIndex++;
-    if(currentSlideIndex >= slides.length) currentSlideIndex = 0;
-    slides[currentSlideIndex].classList.add('active');
-}, 5000); // Менять каждые 5 секунд
